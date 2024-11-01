@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.weblike.ai
+
+# Sitemaps
+Sitemap: https://www.weblike.ai/sitemap.xml
