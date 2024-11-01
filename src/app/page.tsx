@@ -28,20 +28,9 @@ export default function Home() {
 
       <Hero />
 
-      <Feature />
+    
 
-   < Review/>
-
-
-
-      
-
-        <Sectiondetail/>
-      <IntroductionSection />
-
-      <Subscription />
-      <Faq />
-      <Footer />
+ 
 
 
 
