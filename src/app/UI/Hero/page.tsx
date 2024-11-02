@@ -1,173 +1,255 @@
-'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import Image from 'next/image';
-import Logo from '@/app/UI/logo/page';
-import Head from 'next/head';
-import StructuredData from '@/app/structuredata/page'
-const HeroSection: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
+const GeneratedComponent: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex flex-col overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-[#1a1919] overflow-hidden">
+      <style>
+        {`
+          .hero-gradient {
+            background: linear-gradient(
+              125deg,
+              rgba(0, 220, 130, 0.15) 0%,
+              rgba(54, 228, 218, 0.15) 50%,
+              rgba(0, 71, 225, 0.15) 100%
+            );
+          }
 
+          .text-glow {
+            text-shadow: 0 0 20px rgba(0, 220, 130, 0.5);
+          }
 
-   <Head>
-        <title>Weblike AI  - AI-Powered Landing Page Builder | Create Ai web page& landing Pages Instantly</title>
-        <meta name="description" content="Create professional and ultra unique landing pages instantly with Weblike ai 's AI-powered web builder. Transform your ideas into high-converting pages without coding or design skills." />
-        <meta name="keywords" content="landing page builder, AI landing pages, website builder, conversion optimization, custom landing pages, web design, Weblike ai " />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta property="og:title" content="Weblike ai  - Create Custom Landing Pages with AI" />
-        <meta property="og:description" content="Build professional landing pages in minutes with our AI-powered platform. No coding required. Start converting more visitors today!" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://weblike.ai/twitter-card.png" />
-        <meta property="og:url" content="https://weblike.ai" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@weblikeai" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <link rel="canonical" href="https://weblike.ai" />
-        {/* Add these lines to include your favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <StructuredData />
-        
-      </Head>
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
 
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-20 px-4 py-2 flex justify-between items-center">
-        {/* Logo and brand name */}
-        <div className="flex items-center space-x-4">
-          <Logo />
-          <span className="ml-2 text-xl font-semibold text-white">Weblike</span>
-        </div>
-       
+          .animate-float-delayed {
+            animation: float 6s ease-in-out 2s infinite;
+          }
 
-        {/* Desktop navigation */}
-        <nav className="hidden md:flex items-center space-x-4">
-          <Link href="/signup" className="text-black bg-white shadow-lg hover:shadow-xl font-extralight rounded-full text-lg px-4 py-2 transition-transform transform hover:scale-105 duration-300 ease-in-out">
-            Sign In
-          </Link>
+          @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(3deg); }
+          }
+
+          .gradient-border {
+            position: relative;
+            background: linear-gradient(#0A0A0A, #0A0A0A) padding-box,
+                        linear-gradient(to right, #00DC82, #36E4DA) border-box;
+            border: 2px solid transparent;
+          }
+
+          .typing-cursor {
+            animation: blink 1s step-end infinite;
+          }
+
+          @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00DC82 }
+          }
+
+          .grid-background {
+            background-size: 30px 30px;
+            background-image: 
+              linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            animation: gridMove 15s linear infinite;
+          }
+
+          @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
+          }
+
+          .orbit {
+            animation: orbit 20s linear infinite;
+          }
+
+          @keyframes orbit {
+            from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+          }
+
+          .code-window {
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+
+          .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #00DC82;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
+          }
+
+          @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+          }
+
+          @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00DC82 }
+          }
+        `}
+      </style>
+
+      {/* Hero Section */}
+      <div className="relative min-h-screen">
+        {/* Background Elements */}
+        <div className="absolute inset-0 hero-gradient opacity-40"></div>
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-[#00DC82] rounded-full blur-[120px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-20 right-1/4 w-72 h-72 bg-[#0047E1] rounded-full blur-[120px] opacity-20 animate-pulse"></div>
+
+        {/* Navigation */}
+        <nav className="relative z-50 container mx-auto px-6 py-8">
+          <div className="glass-effect rounded-2xl p-4 flex justify-between items-center border border-white/10">
+            <div className="text-2xl font-bold gradient-text">weblike.dev</div>
+            <div className="flex items-center space-x-8">
+              <div className="hidden md:flex space-x-8">
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">Work</a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">Services</a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">About</a>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a>
+              </div>
+              <button className="modern-gradient text-black px-6 py-2.5 rounded-xl font-medium hover:opacity-90 transition-opacity">
+                Start Project
+              </button>
+            </div>
+          </div>
         </nav>
 
-        {/* Mobile menu button */}
-        <button onClick={toggleMenu} className="md:hidden bg-purple-400 text-white p-2 rounded">
-          {menuOpen ? '✕' : '☰'}
-        </button>
-      </header>
+        {/* Main Hero Content */}
+        <div className="container mx-auto px-6 pt-20 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column */}
+            <div className="space-y-8">
+              <div className="inline-block glass-effect px-4 py-2 rounded-full">
+                <span className="text-[#00DC82] flex items-center">
+                  <span className="w-2 h-2 bg-[#00DC82] rounded-full mr-2 animate-pulse"></span>
+                  Web Development • Design • AI Integration
+                </span>
+              </div>
+              
+              <div className="space-y-4">
+                <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
+                  We Build
+                  <br />
+                  <span className="gradient-text text-glow">Digital</span>
+                  <br />
+                  Experiences
+                </h1>
+                <p className="text-xl text-gray-400 max-w-xl">
+                  Transform your vision into reality with our cutting-edge web development 
+                  and design solutions. We create stunning, high-performance digital experiences 
+                  that drive results.
+                </p>
+              </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="absolute top-16 left-0 right-0 bg-slate-400 text-white z-20">
-          <nav className="flex flex-col items-center py-4">
-            <Link href="/signup" className="block py-2 px-4 text-lg">Sign In</Link>
-            <Link href="/about" className="block py-2 px-4 text-lg">About</Link>
-            <Link href="/blogs" className="block py-2 px-4 text-lg">Blogs</Link>
-          </nav>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="modern-gradient text-black px-8 py-4 rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
+                  <span>Get Started</span>
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+                <button className="glass-effect text-white px-8 py-4 rounded-xl font-medium hover:bg-white/10 transition-colors flex items-center justify-center">
+                  <span>View Projects</span>
+                </button>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-8">
+                {[
+                  { number: "150+", label: "Projects Completed" },
+                  { number: "98%", label: "Client Satisfaction" },
+                  { number: "15+", label: "Expert Developers" }
+                ].map((stat, index) => (
+                  <div key={index} className="glass-effect p-4 rounded-xl text-center">
+                    <div className="gradient-text text-2xl font-bold">{stat.number}</div>
+                    <div className="text-gray-400 text-sm">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column - Updated with unique elements */}
+            <div className="relative h-[600px]">
+              {/* Main 3D-like Container */}
+              <div className="relative w-full h-full">
+                {/* Animated Grid Background */}
+                <div className="absolute inset-0 grid-background rounded-3xl"></div>
+
+                {/* Central Code Window */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] code-window rounded-xl p-6 z-20">
+                  {/* Window Controls */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex space-x-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="flex items-center space-x-2 text-gray-400 text-sm">
+                      <span>🔥 main.tsx</span>
+                      <span className="px-2 py-1 rounded-md bg-[#2d2d2d]">React</span>
+                    </div>
+                  </div>
+
+                  {/* Code Content */}
+                  <div className="space-y-4 font-mono text-sm">
+                    <div className="text-blue-400">import <span className="text-white">{'{'}</span> <span className="text-green-400">Motion</span> <span className="text-white">{'}'}</span> <span className="text-blue-400">from</span> <span className="text-orange-300">'framer-motion'</span>;</div>
+                    
+                    <div className="typing-effect text-purple-400">
+                      const <span className="text-blue-400">WeblikeProject</span> = <span className="text-orange-300">async</span> () =&gt; {'{'}</div>
+                    
+                    <div className="pl-4 text-gray-300">
+                      <div>const stack = {'{'}
+                        <div className="pl-4 text-green-400">
+                          frontend: ['React', 'Next.js', 'TailwindCSS'],<br/>
+                          backend: ['Node.js', 'Python', 'AWS'],<br/>
+                          design: ['Figma', 'Motion', 'UI/UX']
+                        </div>
+                      {'}'}</div>
+                    </div>
+
+                    <div className="pl-4 text-purple-400">
+                      return <span className="text-orange-300">buildAmazing</span>(stack);
+                    </div>
+                    
+                    <div className="text-purple-400">{'}'};</div>
+                  </div>
+                </div>
+
+                {/* Orbiting Tech Elements */}
+                {['⚛️', '🚀', '💻', '🎨'].map((emoji, index) => (
+                  <div
+                    key={index}
+                    className={`absolute left-1/2 top-1/2 orbit`}
+                    style={{
+                      animationDelay: `${index * -5}s`,
+                    }}
+                  >
+                    <div className="glass-effect p-4 rounded-xl transform -translate-x-1/2 -translate-y-1/2 hover:scale-110 transition-transform">
+                      <div className="text-2xl">{emoji}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
-      )}
-
-      {/* Background gradient */}
-      <div
-        className="absolute inset-0 bg-indigo-600"
-        style={{ clipPath: "polygon(0 0, 100% 0, 100% 85%, 0 100%)" }}
-      />
-
-  
-
-<main className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 lg:px-16 pt-24 lg:pt-32 z-10 font-sans">
-  {/* Left side - Text content */}
-  <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-8 lg:space-y-12 text-center lg:text-left">
-    <h1 className="text-4xl lg:text-4xl font-normal text-white leading-tight tracking-tight">
-      <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 font-light">
-        Instant
-      </span>
-      <br />
-      <span className="font-extrabold">Landing Pages</span>
-      <br />
-      <span className="text-3xl lg:text-5xl font-medium text-blue-200 tracking-wide">
-        Achieve Results Faster
-      </span>
-    </h1>
-
-    <div className="space-y-6">
-      <p className="text-white text-xl lg:text-xl font-light leading-relaxed">
-        <span className="font-medium text-blue-300 uppercase tracking-wider">Create, iterate, and optimize</span> your pages instantly—transform every campaign into a success story.
-        Say goodbye to generic layouts—every landing page Weblike make is a fresh original.
-      </p>
-
-      <p className="text-white text-lg lg:text-xl font-normal tracking-wide">
-        From Text to Landing Page in Minutes.
-      </p>
-
-      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6">
-        <p className="text-blue-100 text-lg lg:text-xl font-light">
-          Just describe your idea, and AI instantly generates your Landing Page.
-          <span className="block mt-2 font-medium text-yellow-300 tracking-wide">No generic layouts, No designers or developers needed.</span>
-        </p>
       </div>
-    </div>
 
-    <div className="flex justify-center lg:justify-start items-center space-x-4">
-      <Link href="/signup" className="px-8 py-4  bg-white text-black font-medium rounded-full shadow-lg transform transition-all hover:scale-105 hover:shadow-xl hover:from-blue-600 hover:to-purple-700 uppercase tracking-wider">
-        Get Started
-      </Link>
-      <span className="text-white text-sm lg:text-base font-light tracking-wide">
-        Start creating in minute
-      </span>
-    </div>
-  </div>
-
-  {/* Right side - Image */}
-  <div className="w-full lg:w-1/2 mt-12 lg:mt-0">
-    <div className="flex justify-center lg:justify-end overflow-hidden">
-      <Image
-        src="/AI web builder Image.png"
-        alt="AI web builder Image"
-        width={400}
-        height={300}
-        loading="lazy"
-        className="w-90 h-90 transform transition-transform duration-500 hover:scale-105"
-      />
-    </div>
-  </div>
-</main>
-
-      {/* Footer section with video */}
-      <footer className="relative text-center text-white z-10 mt-12 lg:mt-16">
-        <h2 className="text-4xl font-normal lg:text-3xl mb-4">
-          Click, Build, Convert—All in One Go
-        </h2>
-        <h3 className="text-xl lg:text-2xl text-blue-100 mb-6">
-
-          <p className="text-xl lg:text-2xl text-blue-100 mb-6">
-            Quickly build landing pages that align with your brand and boost conversion rates.
-          </p>
-
-        </h3>
-
-
-        {/* Video positioned directly below the text */}
-        <div className="w-full max-w-5xl mx-auto perspective" style={{ perspective: '1000px' }}>
-          <video
-            src="/weblike-ai-image.mp4"
-            width="100%"
-            height="auto"
-            autoPlay
-            loop
-            muted
-            className="w-full h-auto object-cover rounded-lg shadow-2xl"
-          />
-        </div>
-      </footer>
+      {/* ... rest of the sections ... */}
     </div>
   );
 };
 
-export default HeroSection;
+export default GeneratedComponent;
