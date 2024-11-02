@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const GeneratedComponent: React.FC = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[#1a1919] overflow-hidden">
+    <div className="min-h-screen relative  bg-[#1a1919] overflow-hidden">
       <style>
         {`
           .hero-gradient {
@@ -197,31 +197,31 @@ const GeneratedComponent: React.FC = () => {
 
                   {/* Code Content */}
                   <div className="space-y-4 font-mono text-sm">
-                    <div className="text-blue-400">import <span className="text-white">{'{'}</span> <span className="text-green-400">Motion</span> <span className="text-white">{'}'}</span> <span className="text-blue-400">from</span> <span className="text-orange-300">'framer-motion'</span>;</div>
+                    <div className="text-blue-400">import <span className="text-white">{}</span> <span className="text-green-400">Motion</span> <span className="text-white">{}</span> <span className="text-blue-400">from</span> <span className="text-orange-300">framer-motion</span>;</div>
                     
                     <div className="typing-effect text-purple-400">
                       const <span className="text-blue-400">WeblikeProject</span> = <span className="text-orange-300">async</span> () =&gt; {'{'}</div>
                     
                     <div className="pl-4 text-gray-300">
-                      <div>const stack = {'{'}
+                      <div>const stack = {}
                         <div className="pl-4 text-green-400">
-                          frontend: ['React', 'Next.js', 'TailwindCSS'],<br/>
-                          backend: ['Node.js', 'Python', 'AWS'],<br/>
-                          design: ['Figma', 'Motion', 'UI/UX']
+                          frontend: [react],<br/>
+                          backend: [no],<br/>
+                          design: [yes]
                         </div>
-                      {'}'}</div>
+                      {}</div>
                     </div>
 
                     <div className="pl-4 text-purple-400">
                       return <span className="text-orange-300">buildAmazing</span>(stack);
                     </div>
                     
-                    <div className="text-purple-400">{'}'};</div>
+                    <div className="text-purple-400">{};</div>
                   </div>
                 </div>
 
                 {/* Orbiting Tech Elements */}
-                {['⚛️', '🚀', '💻', '🎨'].map((emoji, index) => (
+                {[].map((emoji, index) => (
                   <div
                     key={index}
                     className={`absolute left-1/2 top-1/2 orbit`}
