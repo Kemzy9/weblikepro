@@ -104,7 +104,7 @@ const GeneratedComponent: React.FC = () => {
         {/* Navigation */}
         <nav className="relative z-50 container mx-auto px-6 py-8">
           <div className="glass-effect rounded-2xl p-4 flex justify-between items-center border border-white/10">
-            <div className="text-2xl font-bold gradient-text">weblike.dev</div>
+            <div className="text-2xl font-bold gradient-text">weblike.pro</div>
             <div className="flex items-center space-x-8">
               <div className="hidden md:flex space-x-8">
                 <a href="#" className="text-gray-300 hover:text-white transition-colors">Work</a>
