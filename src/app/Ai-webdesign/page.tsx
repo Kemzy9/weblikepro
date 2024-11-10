@@ -52,58 +52,119 @@ const Aiwebdesign: React.FC = () => {
     const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
     const [showImage, setShowImage] = useState<boolean>(false);
     const [searchKeyword, setSearchKeyword] = useState<string>('');
-    const keyword= ["free ai website","best ai ","Ai webdesign",
-         "Ai webdesign generator",  "drag and drop", 
-         "free drag and drop ", "best drag and drop",
-          "drag and drop","easiest website builder for",
-          "cheapest website","easy website builder for ",
-          "best website builder for","what is the best website",
-          "best ecommerce website builder for","free website builder for"
-          ,"best free website builder for ","ai","free ai","best ai ","church","hotel","education","resturant","Saas",
-          "durable","durable ai website builder","responsive professional","professional ","most professional","interactive ","best interactive ","Creative ","latest","modern","minimalist modern","clean modern","simple modern website design",];
-          
-          
-
-
+    const keyword = [
+        "AI website generator", "website builder", "no-code website",
+        "AI web design", "custom website", "business website",
+        "portfolio website", "e-commerce website", "responsive design",
+        "modern website", "professional website", "website templates",
+        "landing page builder", "website customization", "mobile-friendly website",
+        "SEO-friendly website", "fast website", "secure website",
+        "website hosting", "domain names", "website maintenance",
+        "website analytics", "website optimization", "website security",
+        "website backup", "website support", "website migration",
+        "best AI website builder 2024",
+        "free AI website generator",
+        "AI website design tool",
+        "automated website creator",
+        
+        // Question-based Keywords
+        "how to create website with AI",
+        "which AI website builder is best",
+        "AI vs traditional website builder",
+          // Feature-based Keywords
+    "drag and drop AI website builder",
+    "AI website builder with SEO",
+    "AI website templates",
+    "custom AI website design",
+    
+    // Industry-specific Keywords
+    "AI website builder for small business",
+    "AI ecommerce website creator",
+    "AI portfolio website maker",
+    "AI website builder for startups",
+    "website builder",
+    "create website",
+    "build website",
+    "website design",
+    "free website builder",
+    
+    // AI-Specific Keywords (Growing Search Trend)
+    "ai website creator",
+    "ai website generator",
+    "ai website builder free",
+    "artificial intelligence website builder",
+    
+    // Long-tail Keywords (Lower Competition, Higher Conversion)
+    "how to create website without coding",
+    "best website builder for small business",
+    "easy website builder for beginners",
+    "create business website free",
+    
+    // Problem-Solving Keywords (High Intent)
+    "fastest way to build website",
+    "professional website builder",
+    "website builder with free domain",
+    
+    // Cost-related Keywords
+    "affordable AI website builder",
+    "free AI website maker",
+    "AI website builder pricing",
+    
+    // Comparison Keywords
+    "Wix alternative AI",
+    "Shopify vs AI website builder",
+    "WordPress alternative AI",
+    
+    // Location-based Keywords
+    "AI website builder USA",
+    "AI website creator online",
+    "website builder near me",
+    
+    // Problem-solving Keywords
+    "easy website builder for beginners",
+    "quick website creation tool",
+    "professional website builder AI",
+    "no code website builder AI",
+        "website development", "website design", "website builder platform"
+    ];
 
     const results = [
         {
-            title: `${keyword} website builder software`,
-            url: 'https://www.webllix.com/blog/Introducing-website-builder',
-            description: `${keyword} Effortlessly create stunning websites with AI  website builder software—perfect for any skill level.`,
-            imageUrl: '/education.png', 
+            title: (keyword[0] || 'AI website generator') + ' - Create Professional Websites in Minutes with AI',
+            url: 'https://www.weblike.pro/',
+            description: `Transform your ideas into stunning websites using our advanced ${keyword[1] || 'website builder'}. No coding required - perfect for businesses, creators, and professionals.`,
+            imageUrl: '/professional-website.png',
         },
         {
-            title: `${keyword} Landing page design by webllix `,
-            url: 'https://www.webllix.com/blog/ai-web-design',
-            description: `${keyword}Design eye-catching landing pages that convert visitors into customers with our Ai Model to generate AI webiste design`,
-            imageUrl: '/archit.png', 
+            title: (keyword[2] || 'no-code website') + ' - E-commerce Solutions with Smart AI Integration',
+            url: 'https://www.weblike.pro/',
+            description: `Launch your online store quickly with our ${keyword[3] || 'AI web design'} platform. Features include smart product organization, secure payments, and inventory management.`,
+            imageUrl: '/ecommerce-store.png',
         },
         {
-            title: `${keyword} small business`,
-            url: 'https://www.webllix.com/',
-            description: `${keyword}Empower your small business with a sleek, professional website that easy to create and manage.`,
-            imageUrl: '/yacht.png', 
+            title: (keyword[4] || 'custom website') + ' - AI-Powered Portfolio Websites for Creatives',
+            url: 'https://www.weblike.pro/',
+            description: `Showcase your work beautifully with our ${keyword[5] || 'business website'} solutions. Perfect for artists, photographers, designers, and creative professionals.`,
+            imageUrl: '/portfolio-template.png',
         },
         {
-            title: `${keyword} website builder`,
-            url: 'https://www.webllix.com//blog/drag-and-drop-website-builder',
-            description: `${keyword}Build stunning, responsive websites quickly with our intuitive website builder tool`,
-            imageUrl: '/cosmetic.png', 
+            title: (keyword[6] || 'portfolio website') + ' - Enterprise-Grade Websites with Advanced Features',
+            url: 'https://www.weblike.pro/',
+            description: `Build scalable, secure, and powerful websites with our ${keyword[7] || 'e-commerce website'} platform. Includes advanced analytics, user management, and custom integrations.`,
+            imageUrl: '/enterprise-website.png',
         },
         {
-            title: `${keyword} website design`,
-            url: 'https://www.webllix.com/blog/best-website-design-portfolio',
-            description: `${keyword} Craft modern, responsive websites with our Ai model , webllix genrate a image of webiste and turn into responsive website, try free`,
-            imageUrl: '/cosmetic.png', 
+            title: (keyword[8] || 'responsive design') + ' - Restaurant & Hospitality Website Builder',
+            url: 'https://www.weblike.pro/',
+            description: `Create appetizing restaurant websites with our ${keyword[9] || 'modern website'} builder. Features online ordering, reservation systems, and menu management powered by AI.`,
+            imageUrl: '/restaurant-template.png',
         },
         {
-            title: `${keyword} Top Award wining website by webllix `,
-            url: 'https://www.webllix.com/blog/best-website-design-portfolio',
-            description: `${keyword} Craft modern, Award winning website  with webllix`,
-            imageUrl: '/cosmetic.png', 
-        },
-        // Add more results as needed
+            title: (keyword[10] || 'professional website') + ' - Educational Institution Website Solutions',
+            url: 'https://www.weblike.pro/',
+            description: `Design comprehensive educational websites with our ${keyword[11] || 'website templates'}. Includes learning management systems, student portals, and course catalogs using our AI tools.`,
+            imageUrl: '/education-website.png',
+        }
     ];
 
     const filteredResults = results.filter(result =>
@@ -111,30 +172,73 @@ const Aiwebdesign: React.FC = () => {
         result.description.toLowerCase().includes(searchKeyword.toLowerCase())
     );
 
-    const pageTitle = `${keyword} Introducing Webllix AI Website design`;
-    const pageDescription = `Webllix -Ai website design || Webllix design website and turn into the code,`;
+    // For meta tags, use primary keywords
+    const primaryKeywords = keyword.slice(0, 5).join(', '); // Take first 5 keywords
+    const pageTitle = `${keyword[0] || 'AI Website Builder'} - Introducing Weblike AI landing page builder`;
+    const pageDescription = `Create modern websites in minutes with ${keyword[1] || 'website builder'} - Weblike AI`;
+
+    const schemaMarkup = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Weblike Website Builder",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "priceValidUntil": "2024-12-31",
+            "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "description": "Create professional websites without coding using our AI-powered website builder.",
+        "image": "https://www.weblike.pro/chat.png",
+        "screenshot": "https://www.weblike.pro/twitter-card.png",
+        "featureList": [
+            "AI-Powered Design",
+            "Drag-and-Drop Editor",
+            "Free Hosting",
+            "Mobile Responsive",
+            "SEO Tools"
+        ]
+    };
 
     const handleResultClick = (url: string) => {
         setSelectedUrl(url);
         setShowImage(true); 
     };
+
     return (
         <>
             <Head>
                 <title>{pageTitle}</title>
                 <meta name="description" content={pageDescription} />
-                <meta name="keywords" content="responsive web design, custom web design,AI  web design " />
-                <link rel="canonical" href="https://www.Webllix.com" />
+                <meta name="keywords" content={keyword.join(', ')} />
+                <link rel="canonical" href="https://www.weblike.pro" />
+                
+                {/* OpenGraph Tags */}
                 <meta property="og:title" content={pageTitle} />
                 <meta property="og:description" content={pageDescription} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://www.webllix.com/blog" />
+                <meta property="og:url" content="https://www.weblike.pro/blog" />
+                
+                {/* Twitter Tags */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={pageTitle} />
                 <meta name="twitter:description" content={pageDescription} />
-                <link rel="canonical" href="https://www.webllix.com" />
-   
-
+                
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        ...schemaMarkup,
+                        keywords: primaryKeywords
+                    })}
+                </script>
             </Head>
             <Nav />
             <div className="flex max-w-6xl mx-auto my-10">
@@ -177,3 +281,7 @@ const Aiwebdesign: React.FC = () => {
 };
 
 export default Aiwebdesign;
+
+
+
+//in in term keyword change earch randomized keyword
