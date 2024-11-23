@@ -32,7 +32,11 @@ Ready to launch something new? We make it easy to create a standout landing page
               </button>
             </form>
           </div>
-
+   <li>
+                <a href="https://webd.one" target="_blank" rel="noopener noreferrer" className="text-[#007bff] text-base no-underline">
+                  for React AI landing page
+                </a>
+              </li>
           {/* Solutions and Use Cases */}
           <div className="lg:col-span-2">
             <h4 className="font-semibold mb-6 text-2xl">Solutions for Every Industry</h4>
