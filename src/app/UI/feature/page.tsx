@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import Webdone from '@/app/UI/baner/webdone/page'
+import Baner from '@/app/UI/baner/page'
 
 const GeneratedComponent: React.FC = () => {
   return (
@@ -777,7 +779,8 @@ const Future = {
           </form>
         </div>
       </div>
-
+  <Webdone />
+              <Baner />
       {/* Footer - Updated content */}
       <footer className="glass-effect">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
