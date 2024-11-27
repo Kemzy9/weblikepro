@@ -61,9 +61,9 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectImage }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-indigo-400" style={{ backgroundImage: `url('/7.png')` }}>
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Theme</h2>
-      <div className="mb-8 bg-lime-200 rounded-lg shadow-sm p-6">
+    <div className="max-w-6xl mx-auto p-6 bg-neutral-900" >
+      <h2 className="text-2xl font-bold mb-6 text-white">Theme</h2>
+      <div className="mb-8 bg-neutral-900 rounded-lg shadow-sm p-6">
         <div className="relative flex flex-col items-center">
           <input
             id="prompt"
@@ -74,7 +74,7 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectImage }) => {
             placeholder="Enter your prompt here"
           />
           <button
-            className="text-gray-900 bg-gradient-to-r from-violet-400 to-violet-600 hover:bg-gradient-to-l hover:from-teal-200 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-e-3xl text-sm px-5 py-2.5 text-center me-2 mb-2 flex items-center space-x-1"
+            className="text-white bg-gradient-to-r from-violet-400 to-violet-600 hover:bg-gradient-to-l hover:from-teal-200 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-e-3xl text-sm px-5 py-2.5 text-center me-2 mb-2 flex items-center space-x-1"
             type="button"
             onClick={handleGenerate}
           >
@@ -83,8 +83,8 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectImage }) => {
           </button>
         </div>
       </div>
-      <div className="bg-lime-200 rounded-lg shadow-sm p-6">
-        <h3 className="text-xl font-semibold mb-6 text-gray-700"></h3>
+      <div className="bg-neutral-900 rounded-lg shadow-sm p-6">
+        <h3 className="text-xl font-semibold mb-6 text-white"></h3>
         {incomingImages.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {incomingImages.map((image) => (
@@ -109,8 +109,8 @@ const Gallery: React.FC<GalleryProps> = ({ onSelectImage }) => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <FiImage className="mx-auto text-5xl text-gray-400 mb-4" />
-            <p className="text-gray-500">No theme generated yet.</p>
+            <FiImage className="mx-auto text-5xl text-white mb-4" />
+            <p className="text-white">No theme generated yet.</p>
           </div>
         )}
       </div>
