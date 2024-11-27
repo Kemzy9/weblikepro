@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const GeneratedComponent: React.FC = () => {
   return (
@@ -112,9 +113,11 @@ const GeneratedComponent: React.FC = () => {
                 <a href="#" className="text-gray-300 hover:text-white transition-colors">About</a>
                 <a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a>
               </div>
+              <Link href="/login">
               <button className="modern-gradient text-black px-6 py-2.5 rounded-xl font-medium hover:opacity-90 transition-opacity">
                 Start Project
               </button>
+              </Link>
             </div>
           </div>
         </nav>
@@ -147,12 +150,14 @@ const GeneratedComponent: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/login">
                 <button className="modern-gradient text-black px-8 py-4 rounded-xl font-medium hover:opacity-90 transition-opacity flex items-center justify-center">
                   <span>Get Started</span>
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
+                </Link>
                 <button className="glass-effect text-white px-8 py-4 rounded-xl font-medium hover:bg-white/10 transition-colors flex items-center justify-center">
                   <span>View Projects</span>
                 </button>
