@@ -55,38 +55,15 @@ export default function SignupPage() {
         }
     }
     return (
-        <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-white">
+        <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#0A0A0A]">
             {/* Left side - Image and Testimonial */}
-            <div className="hidden md:flex flex-col items-center justify-center w-full md:w-1/2 p-12 bg-gray-50">
-                <Image 
-                    src="/3.png" 
-                    alt="Testimonial Image" 
-                    width={500}
-                    height={300}
-                    loading='lazy' 
-                    className="w-4/5 h-auto rounded-xl mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300" 
-                />
-                <div className="text-center max-w-md">
-                    <p className="text-gray-700 italic text-lg leading-relaxed font-light">
-                        WebLike has revolutionized our development workflow. The platform powerful features and seamless integration capabilities have made it an indispensable tool for our team.
-                    </p>
-                    <div className="mt-6 flex items-center justify-center space-x-4">
-                        <div className="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
-                            JD
-                        </div>
-                        <div className="text-left">
-                            <p className="text-blue-600 font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Technical Lead, TechCorp</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
             {/* Right side - Signup form */}
-            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6 bg-white">
+            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6">
                 <div className="mb-8 flex flex-col items-center">
                     <Logo />
-                    <h1 className="text-xl font-bold text-gray-900 mt-4">Weblike</h1>
+                    <h1 className="text-xl font-bold text-white mt-4">Webdone</h1>
                     <p className="text-gray-500 mt-2">Create your  account</p>
                 </div>
                 <Card className="w-[350px] sm:w-[400px] border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -98,7 +75,7 @@ export default function SignupPage() {
                     </CardHeader>
                     <CardContent className="grid gap-5">
                         <div className="grid gap-2">
-                            <Label htmlFor="username" className="text-gray-700 font-medium">Username</Label>
+                            <Label htmlFor="username" className="text-white font-medium">Username</Label>
                             <Input
                                 id="username"
                                 type="text"
@@ -109,7 +86,7 @@ export default function SignupPage() {
                             />
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="email" className="text-gray-700 font-medium">Email</Label>
+                            <Label htmlFor="email" className="text-white font-medium">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
