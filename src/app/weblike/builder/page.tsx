@@ -1,17 +1,16 @@
 "use client";
-import React, { useState, useEffect, useRef, ChangeEvent, MouseEvent, useCallback,Suspense } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent, MouseEvent, useCallback, Suspense } from 'react';
 
-import { Download, Maximize2, Code, Minimize2, Sparkles, ExternalLink, Redo2, Undo2, Type, Eye, Grip, Smartphone, Monitor, Palette, Droplet, Play, LayoutList, MousePointerClick, X, MessageSquare , } from 'lucide-react';
+import { Download, Maximize2, Code, Minimize2, Sparkles, ExternalLink, Redo2, Undo2, Type, Eye, Smartphone, MousePointerClick, } from 'lucide-react';
 
-
-import LogoGenerator from '@/app/weblike/weblike/logogenerator/page';
+import StyleControls from '@/app/weblike/weblike/style/StyleControls';
+import Gallery from '@/app/weblike/weblike/gallery/Gallery';
 import Client from '@/app/weblike/weblike/client/page';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import Gallery from '@/app/weblike/weblike/gallery/Gallery';
+import LogoGenerator from '@/app/weblike/weblike/logogenerator/page';
 import BuilderPage from './ BuilderPage';
 import { FiGrid, FiX, FiMinimize2, FiMaximize2, FiCode, FiEye, FiDownload, FiSmartphone, FiMonitor, FiSave, FiShare2, FiSliders, FiImage, FiDroplet, FiPlay } from 'react-icons/fi';
-import StyleControls from '@/app/weblike/weblike/style/StyleControls';
 import { Rnd } from 'react-rnd';
 import { FiMessageSquare, FiSend } from 'react-icons/fi';
 import Logo from '@/app/UI/logo/page';
@@ -66,11 +65,16 @@ const CodePreview: React.FC = () => {
   const [activeColorIndex, setActiveColorIndex] = useState<number>(0);
 
 
-  
-  // ... existing functions ...
 
 
 
+
+  useEffect(() => {
+    if (initialCode) {
+      setCode(initialCode);
+      setOutput(initialCode);
+    }
+  }, []);
 
   ;
   const toggleLeftSidebar = () => {
@@ -114,7 +118,7 @@ const CodePreview: React.FC = () => {
       Object.values(imageUrls).forEach(URL.revokeObjectURL);
     };
   }, [imageUrls]);
- 
+
   // Replace the state variables with refs
   const hoveredElementRef = useRef<Element | null>(null);
   const [selectedElementRef, setSelectedElementRef] = useState<{ current: Element | null }>({ current: null });
@@ -138,37 +142,43 @@ const CodePreview: React.FC = () => {
 
 
   const handleOpenLive = () => {
-    const domain = process.env.DOMAIN;
-
-    // Generate full HTML document with the domain environment variable
+    // Generate full HTML document with styles and images
     const fullHtml = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Live Preview</title>
-        </head>
-        <body>
-            <script>
-                // Optionally use the domain in your script here
-                const domain = "${domain}";
-            </script>
-            ${output}
-        </body>
-        </html>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Live Preview</title>
+        <style>
+          ${Object.entries(imageUrls).map(([imageId, url]) => `
+            [data-image-id="${imageId}"] {
+              background-image: url('${url}');
+              background-size: ${imageSize};
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+          `).join('\n')}
+        </style>
+      </head>
+      <body>
+        ${output}
+      </body>
+      </html>
     `;
 
     // Create a Blob with the HTML content
     const blob = new Blob([fullHtml], { type: 'text/html' });
-
-    // Create a data URL from the Blob
     const dataUrl = URL.createObjectURL(blob);
 
     // Open the data URL in a new tab
     window.open(dataUrl, '_blank');
+
+    // Clean up the URL object
+    setTimeout(() => URL.revokeObjectURL(dataUrl), 100);
   };
 
+  // ... existing code ...
 
 
   // Add this to force re-render when needed
@@ -341,8 +351,21 @@ export default GeneratedComponent;
   const [hoverStyle, setHoverStyle] = useState<{ backgroundColor?: string; backgroundImage?: string }>({});
   const removeColor = () => {
     setIsApplyingColor(false);
-    setHoverStyle({ backgroundColor: '' });
-    applyStyleToSelection({ backgroundColor: '' });
+    if (previewRef.current) {
+      // Get all elements with background color or gradient
+      const elements = previewRef.current.getElementsByTagName('*');
+      Array.from(elements).forEach(element => {
+        if (element instanceof HTMLElement) {
+          element.style.backgroundColor = '';
+          element.style.background = '';
+          element.style.backgroundImage = ''; // Remove any gradients
+        }
+      });
+
+      // Update the preview content
+      setOutput(previewRef.current.innerHTML);
+      setCode(previewRef.current.innerHTML);
+    }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -365,10 +388,23 @@ export default GeneratedComponent;
 
   const removeImage = () => {
     setIsApplyingImage(false);
-    const applyStyleToSelection = (style: { backgroundImage: string; }) => {
-      console.log("Applying style to selection:", style);
-    };
-    applyStyleToSelection({ backgroundImage: '' });
+    if (previewRef.current) {
+      // Get all elements with data-image-id
+      const elementsWithImage = previewRef.current.querySelectorAll('[data-image-id]');
+      elementsWithImage.forEach(element => {
+        if (element instanceof HTMLElement) {
+          element.style.backgroundImage = 'none';
+          element.removeAttribute('data-image-id');
+          element.style.backgroundSize = '';
+          element.style.backgroundPosition = '';
+          element.style.backgroundRepeat = '';
+        }
+      });
+
+      // Update the preview content
+      setOutput(previewRef.current.innerHTML);
+      setCode(previewRef.current.innerHTML);
+    }
   };
 
   const handlePreviewInteraction = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -513,13 +549,8 @@ export default GeneratedComponent;
     }
   };
 
-  const handlePublish = () => {
-    setIsModalOpen(true); // Open the modal
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-  };
+
 
   const toggleGallery = () => {
     setIsGalleryOpen(!isGalleryOpen);
@@ -607,7 +638,7 @@ export default GeneratedComponent;
   }, [isTextEditing]);
 
   const [isTyping, setIsTyping] = useState(false);
-  const typingSpeedMs = 20; // Adjust this value to change typing speed
+  const typingSpeedMs = 400; // Adjust this value to change typing speed
 
 
   const typeCode = async (codeToType: string) => {
@@ -878,75 +909,15 @@ export default GeneratedComponent;
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center bg-lime-200 mb-4 ">
-        <div className="flex space-x-2">
-          {/* Keep only the Preview button visible */}
-          <button
-            className="px-4 py-2 rounded bg-blue-500 text-white"
-            onClick={() => setActiveTab('preview')}
-          >
-            <Eye className="inline-block mr-2" size={18} />
-            Preview
-          </button>
-        </div>
-
-        <label
-          onClick={toggleEditMode}
-          className="inline-flex items-center cursor-pointer"
-        >
-          <input
-            type="checkbox"
-            checked={isEditMode}
-            onChange={toggleEditMode}
-            className="sr-only peer"
-          />
-          <div
-            className={`relative w-11 h-6 rounded-full ${isEditMode ? 'bg-blue-600' : 'bg-gray-200'} peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800`}
-          >
-            <div
-              className={`absolute top-[2px] left-[2px] bg-white border-gray-300 border rounded-full h-5 w-5 transition-transform duration-300 ease-in-out ${isEditMode ? 'translate-x-5' : 'translate-x-0'}`}
-            ></div>
-          </div>
-          <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Edit
-          </span>
-        </label>
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded flex items-center"
-          onClick={handleOpenLive}
-        >
-          <ExternalLink className="inline-block mr-2" size={18} />
-          Open Live
-        </button>
+    <div className='bg-neutral-900'>
 
 
-        <button
-          className="px-4 py-2 bg-purple-400 text-white rounded flex items-center"
-          onClick={saveCode}
-        >
-          <Download className="inline-block mr-2" size={18} />
+      {/* Add a small button to show code */}
 
 
 
-        </button>
-        <Undo2 />
-        <Redo2 color="#121111" />
-        <Logo />
-        <button
-          className="px-2 py-1 bg-gray-300 text-gray-700 rounded text-sm hover:bg-gray-400 transition-colors"
-          onClick={showCodeSection}
-        >
-          <Code className="inline-block mr-1" size={14} />
-          Show Code
-        </button>
-
-        {/* Add a small button to show code */}
-
-      </div>
-
-      <div className="flex h-screen bg-gray-100">
-        <div className={`w-80 bg-white border-r border-gray-200 flex flex-col ${isChatOpen ? '' : 'hidden'}`}>
+      <div className="flex h-screen bg-neutral-900">
+        <div className={`w-80 bg-neutral-900 border-r border-gray-200 flex flex-col ${isChatOpen ? '' : 'hidden'}`}>
           <div className="p-4 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-lg font-semibold">Chat</h2>
             <button onClick={toggleChat} className="text-gray-500 hover:text-gray-700">
@@ -979,7 +950,7 @@ export default GeneratedComponent;
                 className="hidden" // Hide the default file input
                 id="imageInput"
               />
-              <label htmlFor="imageInput" className="px-4 py-2 bg-gray-300 text-black rounded-l-md hover:bg-gray-400 transition-colors cursor-pointer">
+              <label htmlFor="imageInput" className="px-4 py-2 bg-neutral-900 text-white rounded-l-md hover:bg-gray-400 transition-colors cursor-pointer">
                 <FiImage /> {/* Use an appropriate icon for the gallery */}
               </label>
 
@@ -1004,12 +975,13 @@ export default GeneratedComponent;
         </div>
 
 
-       {/* Left Sidebar */}
 
-       <div className={`bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ${isLeftSidebarMinimized ? 'w-16' : 'w-64'}`}>
+
+        {/* Left Sidebar */}
+        <div className={`bg-neutral-900 border-r border-gray-200 flex flex-col transition-all duration-300 ${isLeftSidebarMinimized ? 'w-16' : 'w-64'}`}>
           <div className="p-4 border-b border-gray-200 flex justify-between items-center">
             {!isLeftSidebarMinimized && <h2 className="text-lg font-semibold">Elements</h2>}
-            <button onClick={toggleLeftSidebar} className="text-gray-500 hover:text-gray-700">
+            <button onClick={toggleLeftSidebar} className="text-white hover:text-white">
               {isLeftSidebarMinimized ? <Sparkles size={24} /> : <Smartphone size={24} />}
             </button>
           </div>
@@ -1025,32 +997,7 @@ export default GeneratedComponent;
                   Open Gallery
                 </button>
               </div>
-              <div className="p-4 border-t border-gray-200">
-                <div
-                  onDragEnter={handleDragEnter}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  onClick={handleButtonClick}
-                  className={`p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 hover:border-indigo-500'
-                    }`}
-                >
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileInputChange}
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                  />
-                  <p className="text-gray-600">
-                    {isDragging
-                      ? "Drop the image here..."
-                      : "Drag 'n' drop an image here, or click to select one"
-                    }
-                  </p>
-                </div>
 
-              </div>
             </>
           )}
         </div>
@@ -1058,33 +1005,33 @@ export default GeneratedComponent;
         {/* Main Content */}
         <div className="flex-grow flex flex-col">
           {/* Top Toolbar */}
-          <div className="bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+          <div className="bg-neutral-900 border-b border-gray-200 p-4 flex justify-between items-center">
 
             <div className="flex space-x-2">
               <button
-                className="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 transition-colors"
+                className="px-3 py-1 bg-gray-500 text-gray-700 rounded-md text-sm hover:bg-gray-200 transition-colors"
                 onClick={toggleMobileView}
               >
                 {isMobileView ? <FiMonitor className="inline-block mr-1" size={14} /> : <FiSmartphone className="inline-block mr-1" size={14} />}
                 {isMobileView ? 'Desktop' : 'Mobile'}
               </button>
               <button
-                className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-md text-sm hover:bg-indigo-200 transition-colors"
+                className="px-3 py-1 bg-gray-500 text-gray-700 rounded-md text-sm hover:bg-indigo-200 transition-colors"
                 onClick={saveCode}
               >
                 <FiSave className="inline-block mr-1" size={14} />
                 Save
               </button>
               <button
-                className="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors"
-                onClick={handlePublish}
+                className="px-3 py-1 bg-gray-500 text-gray600 rounded-md text-sm hover:bg-indigo-700 transition-colors"
+                onClick={handleOpenLive}
               >
                 <FiShare2 className="inline-block mr-1" size={14} />
-                Publish
+                Live
               </button>
             </div>
             <button
-              className={`px-3 py-1 ${isTextEditing ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'} rounded-md text-sm hover:bg-indigo-700 transition-colors`}
+              className={`px-3 py-1 ${isTextEditing ? 'bg-gray-500 text-gray-700' : 'bg-gray-700 text-500'} rounded-md text-sm hover:bg-indigo-700 transition-colors`}
               onClick={toggleTextEditing}
             >
               <Type className="inline-block mr-1" size={14} />
@@ -1095,7 +1042,7 @@ export default GeneratedComponent;
           {/* Editor Area */}
           <div className="flex-grow flex overflow-hidden">
             <div className="flex-grow p-4 overflow-auto">
-              <div className={`bg-white shadow-lg rounded-lg overflow-hidden ${isMobileView ? 'w-[375px] mx-auto' : 'w-full'}`}>
+              <div className={`bg-gray-500 shadow-lg rounded-lg overflow-hidden ${isMobileView ? 'w-[375px] mx-auto' : 'w-full'}`}>
                 <div className="bg-gray-800 px-4 py-2 flex items-center">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -1161,7 +1108,7 @@ export default GeneratedComponent;
                         {['top', 'right', 'bottom', 'left'].map((side) => (
                           <div
                             key={side}
-                            className={`absolute bg-white border-2 border-blue-500 ${side === 'top' || side === 'bottom' ? 'w-4 h-3 -translate-x-1/2' : 'w-3 h-4 -translate-y-1/2'
+                            className={`absolute bg-gray-500 border-2 border-blue-500 ${side === 'top' || side === 'bottom' ? 'w-4 h-3 -translate-x-1/2' : 'w-3 h-4 -translate-y-1/2'
                               } ${side === 'top' ? 'top-0' : side === 'bottom' ? 'bottom-0' : ''} ${side === 'left' ? 'left-0' : side === 'right' ? 'right-0' : ''
                               } transition-all duration-200 ease-in-out`}
                           ></div>
@@ -1228,9 +1175,10 @@ export default GeneratedComponent;
                       value={code}
                       onChange={(e) => setCode(e.target.value)}
                       className="w-full h-full p-2 text-white bg-gray-900 border border-gray-700 rounded"
+
                     /><Suspense fallback={<div>Loading...</div>}>
-                    <BuilderPage setCode={setCode} />
-                  </Suspense>
+                      <BuilderPage setCode={setCode} />
+                    </Suspense>
                   </div>
 
                 </div>
@@ -1241,14 +1189,33 @@ export default GeneratedComponent;
         </div>
 
         {/* Right Sidebar */}
-        <div className={`bg-gradient-to-b from-indigo-100 to-white border-l border-gray-200 flex flex-col transition-all duration-300 ${isRightSidebarMinimized ? 'w-16' : 'w-60'}`}>
-          <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-white">
-            {!isRightSidebarMinimized && <h2 className="text-lg font-semibold text-indigo-600">Design Lab</h2>}
+        <div className={`bg-neutral-900 to-white border-l border-gray-200 flex flex-col transition-all duration-300 ${isRightSidebarMinimized ? 'w-16' : 'w-60'}`}>
+          <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-neutral-900">
+            <Logo />
+
+            {!isRightSidebarMinimized && <h2 className="text-lg font-semibold text-black"></h2>}
             <button onClick={toggleRightSidebar} className="text-gray-500 hover:text-indigo-600 transition-colors">
               {isRightSidebarMinimized ? <Minimize2 size={24} /> : <Maximize2 size={24} />}
             </button>
+            <button
+
+              className="px-3 py-1  "
+              onClick={() => setActiveTab('preview')}
+            >
+              <Eye className="inline-block mr-2" size={14} />
+
+            </button>
+            <button
+              className="px-2 py-1"
+              onClick={showCodeSection}
+            >
+              <Code className="inline-block mr-1" size={14} />
+
+            </button>
           </div>
+
           {!isRightSidebarMinimized && (
+
             <div className="flex-grow overflow-y-auto px-2">
 
               {/* Quick Actions */}
@@ -1261,7 +1228,7 @@ export default GeneratedComponent;
                   { icon: <FiGrid size={20} />, label: "Gallery", onClick: toggleGallery },
                 ].map((action, index) => (
                   <button key={index} onClick={action.onClick} className="flex flex-col items-center group">
-                    <div className="p-3 bg-white rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:bg-indigo-50">
+                    <div className="p-3 bg-gray-500 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:bg-indigo-50">
                       {action.icon}
                     </div>
                     <span className="mt-2 text-xs text-gray-600 group-hover:text-indigo-600">{action.label}</span>
@@ -1272,8 +1239,8 @@ export default GeneratedComponent;
               {/* Settings Sections */}
               <div className="space-y-8">
                 {/* Image Settings */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-800 flex items-center mb-4">
+                <div className="bg-neutral-900 p-6 rounded-xl shadow-md">
+                  <h3 className="text-lg font-semibold text-white flex items-center mb-4">
                     <FiImage className="mr-2" size={18} />
                     Image
                   </h3>
@@ -1288,8 +1255,8 @@ export default GeneratedComponent;
                       <option value="large">Expansive</option>
                     </select>
                     <div className="flex space-x-2">
-                      <button onClick={applyImage} className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Apply</button>
-                      <button onClick={removeImage} className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Remove</button>
+                      <button onClick={applyImage} className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Apply</button>
+                      <button onClick={removeImage} className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Remove</button>
                     </div>
                     <div className="relative">
                       <input type="file" accept="image/*" onChange={handleImageChange} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
@@ -1304,24 +1271,24 @@ export default GeneratedComponent;
                         onChange={handleDesignLabImageChange}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       />
-                      <div className="w-full px-4 py-2 bg-gray-100 text-center text-gray-600 rounded-md border-2 border-dashed border-gray-300 hover:bg-gray-200 transition-colors">
+                      <div className="w-full px-4 py-2 bg-gray-500 text-center text-yellow-50 rounded-md border-2 border-dashed border-gray-300 hover:bg-gray-200 transition-colors">
                         Choose Image
                       </div>
                     </div>
 
                     {selectedDesignLabImage && (
                       <div className="mt-4">
-                       <Image 
-  src={selectedDesignLabImage.url} 
-  alt="Selected design lab image" 
-  width={300}
-  height={160}
-  objectFit="cover"
-  className="rounded-md"
-/>
+                        <Image
+                          src={selectedDesignLabImage.url}
+                          alt="Selected design lab image"
+                          width={300}
+                          height={160}
+                          objectFit="cover"
+                          className="rounded-md"
+                        />
                         <button
                           onClick={addSelectedImageToPreview}
-                          className="mt-2 w-full px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors"
+                          className="mt-2 w-full px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors"
                         >
                           Add to Preview
                         </button>
@@ -1331,7 +1298,7 @@ export default GeneratedComponent;
                 </div>
 
                 {/* Color Settings */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="bbg-gray-500 p-6 rounded-xl shadow-md">
                   <h3 className="text-lg font-semibold text-gray-800 flex items-center mb-4">
                     <FiDroplet className="mr-2" size={18} />
                     Color
@@ -1353,17 +1320,42 @@ export default GeneratedComponent;
                     </div>
                     <div className="h-8 rounded-md" style={{ background: `linear-gradient(45deg, ${selectedColors.join(', ')})` }}></div>
                     <div className="grid grid-cols-2 gap-2">
-                      <button onClick={applyColor} className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Apply</button>
-                      <button onClick={removeColor} className="px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Remove</button>
+                      <button onClick={applyColor} className="px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Apply</button>
+                      <button onClick={removeColor} className="px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Remove</button>
                       <button onClick={() => removeAppliedStyle('color')} className="col-span-2 px-4 py-2 bg-gray-600 text-white rounded-md text-sm hover:bg-gray-700 transition-colors">Reset Palette</button>
                     </div>
                   </div>
                 </div>
+                <div className="p-4 border-t border-gray-200">
+                  <div
+                    onDragEnter={handleDragEnter}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    onClick={handleButtonClick}
+                    className={`p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors ${isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 hover:border-indigo-500'
+                      }`}
+                  >
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileInputChange}
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                    />
+                    <p className="text-gray-600">
+                      {isDragging
+                        ? "Drop the image here..."
+                        : "Drag 'n' drop an image here, or click to select one"
+                      }
+                    </p>
+                  </div>
 
+                </div>
 
                 {/* Animation Settings */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-800 flex items-center mb-4">
+                <div className="bg-gray-500 p-6 rounded-xl shadow-md">
+                  <h3 className="text-lg font-semibold text-white flex items-center mb-4">
                     <FiPlay className="mr-2" size={18} />
                     Motion Potion
                   </h3>
@@ -1380,8 +1372,8 @@ export default GeneratedComponent;
                       <option value="rotate">Rotate</option>
                     </select>
                     <div className="flex space-x-2">
-                      <button onClick={applyAnimation} className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Cast Spell</button>
-                      <button onClick={removeAllAnimations} className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Dispel All</button>
+                      <button onClick={applyAnimation} className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">Cast Spell</button>
+                      <button onClick={removeAllAnimations} className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-md text-sm hover:bg-red-700 transition-colors">Dispel All</button>
                     </div>
                   </div>
                 </div>
@@ -1393,7 +1385,7 @@ export default GeneratedComponent;
 
         {/* Gallery Modal */}
         {isGalleryOpen && (
-          <div className={`fixed inset-y-0 right-0 bg-white shadow-lg z-50 transition-all duration-300 ${isGalleryMinimized ? 'w-16' : 'w-96'
+          <div className={`fixed inset-y-0 right-0 bg-neutral-600 shadow-lg z-50 transition-all duration-300 ${isGalleryMinimized ? 'w-16' : 'w-96'
             }`}>
             <div className="p-4 h-full flex flex-col">
               <div className="flex justify-between items-center mb-4">
@@ -1412,32 +1404,32 @@ export default GeneratedComponent;
                   <div className="flex space-x-2 mb-4">
                     <button
                       onClick={() => setGalleryTab('images')}
-                      className={`px-3 py-1 rounded ${galleryTab === 'images' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      className={`px-3 py-1 rounded ${galleryTab === 'images' ? 'bg-gray-500 text-white' : 'bg-gray-200 text-gray-700'}`}
                     >
                       Theme
                     </button>
                     <button
                       onClick={() => setGalleryTab('logos')}
-                      className={`px-3 py-1 rounded ${galleryTab === 'logos' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      className={`px-3 py-1 rounded ${galleryTab === 'logos' ? 'bg-gray-500 text-white' : 'bg-gray-200 text-gray-700'}`}
                     >
                       Logos
                     </button>
                     <button
                       onClick={() => setGalleryTab('client')}
-                      className={`px-3 py-1 rounded ${galleryTab === 'client' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      className={`px-3 py-1 rounded ${galleryTab === 'client' ? 'bg-indigo-600 text-white' : 'bg-gray-500 text-gray-700'}`}
                     >
                       Image
                     </button>
                   </div>
                   <div className="flex-grow overflow-y-auto">
-                  {galleryTab === 'images' && <Gallery onSelectImage={handleSelectGalleryImage} />}
-                   {galleryTab === 'logos' && <LogoGenerator />}
-                   {galleryTab === 'client' && <Client />}
+                    {galleryTab === 'images' && <Gallery onSelectImage={handleSelectGalleryImage} />}
+                    {galleryTab === 'logos' && <LogoGenerator />}
+                    {galleryTab === 'client' && <Client />}
                   </div>
                   {selectedGalleryImage && galleryTab !== 'client' && (
                     <button
                       onClick={applySelectedImage}
-                      className="mt-4 w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition duration-200"
+                      className="mt-4 w-full px-4 py-2 bg-gray-500 text-white rounded hover:bg-indigo-700 transition duration-200"
                     >
                       Apply Selected {galleryTab === 'logos' ? 'Logo' : 'Image'}
                     </button>
@@ -1451,17 +1443,17 @@ export default GeneratedComponent;
         {/* Minimized Gallery Preview */}
         {isGalleryOpen && isGalleryMinimized && selectedGalleryImage && (
           <div className="fixed bottom-4 right-20 bg-white p-2 rounded-lg shadow-md">
-         <Image
-  src={selectedGalleryImage.url ?? ''}
-  alt="Selected gallery image"
-  width={48}
-  height={48}
-  objectFit="cover"
-  className="rounded"
-/>
+            <Image
+              src={selectedGalleryImage.url ?? ''}
+              alt="Selected gallery image"
+              width={48}
+              height={48}
+              objectFit="cover"
+              className="rounded"
+            />
             <button
               onClick={applySelectedImage}
-              className="mt-2 w-full px-2 py-1 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700 transition duration-200"
+              className="mt-2 w-full px-2 py-1 bg-gray-500 text-white text-xs rounded hover:bg-indigo-700 transition duration-200"
             >
               Apply
             </button>
@@ -1470,7 +1462,7 @@ export default GeneratedComponent;
 
 
         {/* Publish Modal */}
-   
+
 
 
 
@@ -1505,4 +1497,4 @@ export default GeneratedComponent;
 export default CodePreview;
 
 
-
+///latest version yes yes yes
