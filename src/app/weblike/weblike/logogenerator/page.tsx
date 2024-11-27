@@ -157,8 +157,8 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800">Logo Generator</h2>
+    <div className="bg-neutral-900 p-8 rounded-lg shadow-lg max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-8 text-white">Logo Generator</h2>
       <div className="flex space-x-6">
         <div className="w-1/4 border-r pr-4">
           <h3 className="text-lg font-semibold mb-4">Logo Type</h3>
@@ -193,9 +193,9 @@ const LogoGenerator: React.FC<LogoGeneratorProps> = () => {
               placeholder="E.g., A modern tech company logo with vibrant colors"
             />
           </div>
-          <div className="bg-indigo-200 p-4 rounded-md">
+          <div className="bg-neutral-900 p-4 rounded-md">
             <h4 className="font-medium mb-2">Selected Logo Type: {selectedLogoType?.label || 'None'}</h4>
-            <p className="text-sm text-gray-600">{selectedLogoType?.description || 'Select a logo type to see its description.'}</p>
+            <p className="text-sm text-white">{selectedLogoType?.description || 'Select a logo type to see its description.'}</p>
           </div>
           <button
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-300 ease-in-out flex items-center justify-center text-lg"
