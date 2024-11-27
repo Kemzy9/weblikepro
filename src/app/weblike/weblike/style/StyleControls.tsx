@@ -111,12 +111,12 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-sm w-full p-3 text-sm">
-            <h2 className="text-lg font-semibold text-gray-800 mb-3">Style Editor</h2>
+        <div className="bg-neutral-900 rounded-lg shadow-sm w-full p-3 text-sm">
+            <h2 className="text-lg font-semibold text-gray-500 mb-3">Style Editor</h2>
             
             {/* Text Styling */}
             <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <h3 className="text-sm font-medium text-gray-500 mb-2 flex items-center">
                     <Type className="mr-2" size={16} />
                     Text
                 </h3>
@@ -129,7 +129,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                 setFontFamily(e.target.value);
                                 handleStyleChange('fontFamily', e.target.value);
                             }}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="Arial, sans-serif">Arial</option>
                             <option value="'Courier New', Courier, monospace">Courier New</option>
@@ -247,9 +247,9 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                     const newSize = `${e.target.value}px`;
                                     setFontSize(newSize);
                                 }}
-                                className="w-1/3 p-1 text-xs border rounded bg-gray-50"
+                                className="w-1/3 p-1 text-xs border rounded bg-gray-500"
                             />
-                            <button onClick={handleApplyFontSize} className="ml-2 p-1 bg-blue-500 text-white rounded">
+                            <button onClick={handleApplyFontSize} className="ml-2 p-1 bg-gray-500 text-black-500 rounded">
                                 Apply
                             </button>
                         </div>
@@ -257,13 +257,13 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                     <div className="flex justify-between items-center">
                         <label className="text-xs text-gray-500">Style</label>
                         <div className="flex space-x-1">
-                            <button onClick={handleFontWeight} className={`p-1 rounded ${fontWeight === 'bold' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'}`}>
+                            <button onClick={handleFontWeight} className={`p-1 rounded ${fontWeight === 'bold' ? 'bg-blue-100 text-blue-600' : 'bg-gray-500 text-black'}`}>
                                 <Bold size={14} />
                             </button>
-                            <button onClick={handleFontStyle} className={`p-1 rounded ${fontStyle === 'italic' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'}`}>
+                            <button onClick={handleFontStyle} className={`p-1 rounded ${fontStyle === 'italic' ? 'bg-blue-100 text-blue-600' : 'bg-gray-500 text-black'}`}>
                                 <Italic size={14} />
                             </button>
-                            <button onClick={handleTextDecoration} className={`p-1 rounded ${textDecoration === 'underline' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'}`}>
+                            <button onClick={handleTextDecoration} className={`p-1 rounded ${textDecoration === 'underline' ? 'bg-blue-100 text-blue-600' : 'bg-gray-500 text-black'}`}>
                                 <Underline size={14} />
                             </button>
                         </div>
@@ -287,13 +287,13 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
 
             {/* Colors */}
             <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <h3 className="text-sm font-medium text-gray-500 mb-2 flex items-center">
                     <Droplet className="mr-2" size={16} />
                     Colors
                 </h3>
                 <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                        <label className="text-xs text-gray-500">Text</label>
+                        <label className="text-xs  text-gray-500">Text</label>
                         <div className="flex items-center">
                             <input
                                 type="color"
@@ -302,7 +302,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                     setColor(e.target.value);
                                     handleStyleChange('color', e.target.value);
                                 }}
-                                className="w-6 h-6 border rounded mr-1"
+                                className="w-6 h-6 border bg-gray-500 rounded mr-1"
                             />
                             <input
                                 type="text"
@@ -311,7 +311,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                     setColor(e.target.value);
                                     handleStyleChange('color', e.target.value);
                                 }}
-                                className="w-20 p-1 text-xs border rounded bg-gray-50"
+                                className="w-20 p-1 text-xs border rounded bg-gray-500"
                             />
                         </div>
                     </div>
@@ -325,7 +325,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                     setBackgroundColor(e.target.value);
                                     handleStyleChange('backgroundColor', e.target.value);
                                 }}
-                                className="w-6 h-6 border rounded mr-1"
+                                className="w-6 h-6 border bg-gray-500 rounded mr-1"
                             />
                             <input
                                 type="text"
@@ -334,7 +334,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                     setBackgroundColor(e.target.value);
                                     handleStyleChange('backgroundColor', e.target.value);
                                 }}
-                                className="w-20 p-1 text-xs border rounded bg-gray-50"
+                                className="w-20 p-1 text-xs border rounded bg-gray-500"
                             />
                         </div>
                     </div>
@@ -343,7 +343,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
 
             {/* Shape */}
             <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <h3 className="text-sm font-medium text-gray-500 mb-2 flex items-center">
                     <Square className="mr-2" size={16} />
                     Shape
                 </h3>
@@ -356,7 +356,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                 setBorderRadius(e.target.value);
                                 handleStyleChange('class', e.target.value);
                             }}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="rounded-none">None</option>
                             <option value="rounded-xl">Extra Large</option>
@@ -371,7 +371,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                                 setShape(e.target.value);
                                 handleStyleChange('class', e.target.value === 'circle' ? 'rounded-full' : 'rounded-none');
                             }}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="none">None</option>
                             <option value="circle">Circle</option>
@@ -382,7 +382,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
             </div>
 
             <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
+                <h3 className="text-sm font-medium text-gray-500 mb-2 flex items-center">
                     <Type className="mr-2" size={16} />
                     Text Properties
                 </h3>
@@ -392,7 +392,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                         <select
                             value={lineHeight}
                             onChange={(e) => handleLineHeightChange(e.target.value)}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="normal">Normal</option>
                             <option value="1.5">1.5</option>
@@ -405,7 +405,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                         <select
                             value={letterSpacing}
                             onChange={(e) => handleLetterSpacingChange(e.target.value)}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="normal">Normal</option>
                             <option value="0.1em">0.1em</option>
@@ -418,7 +418,7 @@ const StyleControls: React.FC<StyleControlsProps> = ({ onStyleChange = () => {} 
                         <select
                             value={textTransform}
                             onChange={(e) => handleTextTransformChange(e.target.value)}
-                            className="w-2/3 p-1 text-xs border rounded bg-gray-50"
+                            className="w-2/3 p-1 text-xs border rounded bg-gray-500"
                         >
                             <option value="none">None</option>
                             <option value="uppercase">Uppercase</option>
