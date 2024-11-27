@@ -5,31 +5,31 @@ const StructuredData = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Weblike ai ",
+    "name": "Weblikepro ",
     "applicationCategory": "WebApplication",
     "operatingSystem": "Web",
-    "url": "https://weblike.ai",
-    "image": "https://weblike.ai/twitter-card.png",
-    "description": "AI-powered landing page builder that helps create professional, high-converting pages instantly without coding.",
+    "url": "https://weblike.pro",
+    "image": "https://weblike.pro/twitter-card.png",
+    "description": "Build Website wiht AI Just by clicking Let AI Create A Webiste for You .",
     "offers": {
       "@type": "Offer",
-      "price": "0",
+      "price": "9",
       "priceCurrency": "USD"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "150"
+      "ratingValue": "4.9",
+      "ratingCount": "160"
     },
     "creator": {
       "@type": "Organization",
-      "name": "Weblike ai",
-      "url": "https://weblike.ai/twitter-card.png",
-      "logo": "https://weblike.ai/logo.png"
+      "name": "Weblikepro",
+      "url": "https://weblike.pro/twitter-card.png",
+      "logo": "https://weblike.pro/logo.png"
     },
     "featureList": [
-      "AI-powered page generation",
-      "Custom design templates",
+      "AI-powred Website maker",
+      "Create Custome Website With AI",
       "Instant page creation",
       "Conversion optimization"
     ]
