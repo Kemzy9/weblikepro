@@ -49,13 +49,13 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-white">
+        <div className="min-h-screen flex flex-col md:flex-row items-center justify-center  bg-[#0A0A0A]">
             {/* Left side - Login form */}
-            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6 bg-white">
+            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6">
                 <div className="mb-8 flex flex-col items-center">
                     <Logo />
-                    <h1 className="text-4xl font-bold text-gray-900 mt-4">Weblike</h1>
-                    <p className="text-gray-500 mt-2">Welcome back! Please login to continue</p>
+                    <h1 className="text-xl font-bold text-white mt-4">Webd.one</h1>
+                    <p className="text-white mt-2">Welcome back! Please login to continue</p>
                 </div>
 
                 <Card className="w-[350px] sm:w-[400px] border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -79,7 +79,7 @@ export default function LoginPage() {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center justify-between">
-                                <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
+                                <Label htmlFor="password" className="text-white font-medium">Password</Label>
                                 <Link 
                                     href="/forgotpassword" 
                                     className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
@@ -133,34 +133,12 @@ export default function LoginPage() {
                             </Link>
                         </div>
                     </CardFooter>
+              
                 </Card>
             </div>
 
-            {/* Right side - Image and Testimonial */}
-            <div className="hidden md:flex flex-col items-center justify-center w-full md:w-1/2 p-12 bg-gray-50">
-                <Image 
-                    src="/3.png" 
-                    alt="Testimonial Image" 
-                    width={500}
-                    height={300}
-                    loading='lazy' 
-                    className="w-4/5 h-auto rounded-xl mb-8 shadow-lg hover:shadow-xl transition-shadow duration-300" 
-                />
-                <div className="text-center max-w-md">
-                    <p className="text-gray-700 italic text-lg leading-relaxed font-light">
-                        &ldquo;WebLike&apos;s intuitive interface and robust features have streamlined our development process. The platform&apos;s reliability and performance are unmatched.&rdquo;
-                    </p>
-                    <div className="mt-6 flex items-center justify-center space-x-4">
-                        <div className="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
-                            JD
-                        </div>
-                        <div className="text-left">
-                            <p className="text-blue-600 font-semibold">John Doe</p>
-                            <p className="text-sm text-gray-500">Senior Developer, TechCorp</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      
+          
         </div>
     )
 }
