@@ -8,26 +8,26 @@ import { ThemeProvider } from '@/components/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://weblike.ai'),
-  title: 'Weblike AI - AI-Powered Landing Page Builder | Create AI web page & landing Pages Instantly',
-  description: 'Create professional and ultra unique landing pages instantly with Weblike AI\'s AI-powered web builder. Transform your ideas into high-converting pages without coding or design skills.',
+  metadataBase: new URL('https://weblike.pro'),
+  title: 'Create a eye catching Website With AI ',
+  description: 'Create a Custome Website AI Just By Clicking or Say to AI and AI will make stunning  website ',
   openGraph: {
-    title: 'Weblike AI - Create Custom Landing Pages with AI',
-    description: 'Whether you are a startup or a pro, create sleek, modern landing page with AI. No experience? No problem! Get started in minutes!',
+    title: 'Weblike Pro- Create Custom Website AI AI',
+    description: 'Creating Website With AI its become Easy creating Unlimited page and Website with AI NO  pre made template ,Say to AI and AI will create New a Stunning website  ',
     type: 'website',
-    url: 'https://weblike.ai',
+    url: 'https://weblike.pro',
     images: [{
-      url: 'https://weblike.ai/twitter-card.png',
+      url: 'https://weblike.pro/twitter-card.png',
       width: 1200,
       height: 630,
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@weblikeai',
+    site: '@weblikepro',
     creator: '@weblikeai',
-    title: 'Weblike AI - Create Custom Landing Pages with AI',
-    description: 'Whether you are a startup or a pro, create sleek, modern landing page with AI. No experience? No problem! Get started in minutes!',
+    title: 'Weblikepro - Create Custom  Website With AI',
+    description: 'Creating Website With AI its become Easy creating Unlimited page and Website with AI NO  pre made template ',
     images: ['https://weblike.ai/twitter-card.png'],
   },
   icons: {
