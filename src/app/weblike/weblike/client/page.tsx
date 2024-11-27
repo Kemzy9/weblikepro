@@ -57,14 +57,14 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800 text-center flex items-center justify-center">
+    <div className="max-w-4xl mx-auto bg-neutral-900 p-8 rounded-lg shadow-md">
+      <h2 className="text-3xl font-bold mb-8 text-white text-center flex items-center justify-center">
         <Sparkles className="text-blue-600 mr-2" size={28} />
         AI Image Generator
       </h2>
-      <div className="bg-gray-50 p-6 rounded-lg shadow-sm space-y-6">
+      <div className="bg-neutral-900 p-6 rounded-lg shadow-sm space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-white mb-2">
             Select image type
           </label>
           <div className="flex flex-wrap gap-4">
@@ -79,8 +79,8 @@ const Gallery: React.FC = () => {
                 />
                 <div className={`flex items-center justify-center p-3 rounded-md transition-colors ${
                   imageType === option.value
-                    ? 'bg-blue-100 text-blue-600'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                    ? 'bg-neutral-900 text-blue-600'
+                    : 'bg-neutral-900 text-gray-600 hover:bg-gray-300'
                 }`}>
                   <option.icon size={20} className="mr-2" />
                   {option.label}
@@ -90,7 +90,7 @@ const Gallery: React.FC = () => {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="prompt">
+          <label className="block text-sm font-medium text-white mb-2" htmlFor="prompt">
             Enter your prompt
           </label>
           <input
@@ -123,7 +123,7 @@ const Gallery: React.FC = () => {
       </div>
       {generatedImageId && (
         <div className="mt-10 bg-gray-50 p-6 rounded-lg shadow-sm">
-          <h3 className="text-2xl font-semibold mb-6 text-gray-800 text-center">Generated {imageType.charAt(0).toUpperCase() + imageType.slice(1)}</h3>
+          <h3 className="text-2xl font-semibold mb-6 text-white text-center">Generated {imageType.charAt(0).toUpperCase() + imageType.slice(1)}</h3>
           <div className="relative aspect-square overflow-hidden rounded-md shadow-md">
             <Image
               src={`/api/users/generate/flux?id=${generatedImageId}`}
