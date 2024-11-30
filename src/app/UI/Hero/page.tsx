@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -5,8 +6,8 @@ import Link from 'next/link';
 const GeneratedComponent: React.FC = () => {
   return (
     <div className="min-h-screen relative  bg-[#1a1919] overflow-hidden">
-      <style>
-        {`
+    <style jsx global>{`
+   
           .hero-gradient {
             background: linear-gradient(
               125deg,
@@ -92,8 +93,7 @@ const GeneratedComponent: React.FC = () => {
             from, to { border-color: transparent }
             50% { border-color: #00DC82 }
           }
-        `}
-      </style>
+                    `}</style>
 
       {/* Hero Section */}
       <div className="relative min-h-screen">
@@ -136,16 +136,16 @@ const GeneratedComponent: React.FC = () => {
               
               <div className="space-y-4">
                 <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
-                  We Build
+                Build Websites 
                   <br />
-                  <span className="gradient-text text-glow">Digital</span>
+                  <span className="gradient-text text-glow">   in Minutes</span>
                   <br />
-                  Experiences
+                with by Clicking
                 </h1>
                 <p className="text-xl text-gray-400 max-w-xl">
-                  Transform your vision into reality with our cutting-edge web development 
-                  and design solutions. We create stunning, high-performance digital experiences 
-                  that drive results.
+                Build your dream website effortlessly. No coding or skills required—just click and create!
+
+                Don not waste hours designing. Click, design, and go live instantly.
                 </p>
               </div>
 
