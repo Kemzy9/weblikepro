@@ -63,7 +63,7 @@ export default function SignupPage() {
             <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6">
                 <div className="mb-8 flex flex-col items-center">
                     <Logo />
-                    <h1 className="text-xl font-bold text-white mt-4">Webdone</h1>
+                    <h1 className="text-xl font-bold text-white mt-4"></h1>
                     <p className="text-gray-500 mt-2">Create your  account</p>
                 </div>
                 <Card className="w-[350px] sm:w-[400px] border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
