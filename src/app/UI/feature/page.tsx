@@ -1,11 +1,48 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 const GeneratedComponent: React.FC = () => {
+  // State for dynamic elements
+  const [streams, setStreams] = useState<Array<{
+    left: string;
+    animationDelay: string;
+    animationDuration: string;
+  }>>([]);
+  
+  const [particles, setParticles] = useState<Array<{
+    left: string;
+    top: string;
+    animationDelay: string;
+    animationDuration: string;
+  }>>([]);
+
+  // Generate dynamic elements on client-side only
+  useEffect(() => {
+    // Generate streams
+    const newStreams = Array(10).fill(null).map(() => ({
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${3 + Math.random() * 4}s`
+    }));
+    setStreams(newStreams);
+
+    // Generate particles
+    const newParticles = Array(15).fill(null).map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 8}s`,
+      animationDuration: `${8 + Math.random() * 4}s`
+    }));
+    setParticles(newParticles);
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#0A0A0A]">
-      <style>
-        {`
+        <style jsx global>{`
+   
           .modern-gradient {
             background: linear-gradient(125deg, #00DC82 0%, #36E4DA 50%, #0047E1 100%);
           }
@@ -276,10 +313,88 @@ const GeneratedComponent: React.FC = () => {
             border-color: rgba(0, 220, 130, 0.5);
             box-shadow: 0 0 30px rgba(0, 220, 130, 0.2);
           }
-        `}
-      </style>
 
+          .neural-network {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 220, 130, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            animation: networkPulse 4s ease-in-out infinite;
+          }
 
+          .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #00DC82, transparent);
+            filter: blur(1px);
+            opacity: 0;
+            animation: dataFlow 3s linear infinite;
+          }
+
+          .ai-circuit {
+            position: absolute;
+            inset: 0;
+            background-image: 
+              linear-gradient(90deg, rgba(0, 220, 130, 0.03) 1px, transparent 1px),
+              linear-gradient(rgba(0, 220, 130, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+            animation: circuitPulse 10s linear infinite;
+          }
+
+          .quantum-particles {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 220, 130, 0.5);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: quantumFloat 8s ease-in-out infinite;
+          }
+
+          @keyframes networkPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+          }
+
+          @keyframes dataFlow {
+            0% { transform: translateY(-100%) translateX(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+          }
+
+          @keyframes circuitPulse {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-100px) translateY(-100px); }
+          }
+
+          @keyframes quantumFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            25% { transform: translate(100px, -50px) scale(1.5); opacity: 0.6; }
+            50% { transform: translate(200px, 0) scale(1); opacity: 0.3; }
+            75% { transform: translate(100px, 50px) scale(1.5); opacity: 0.6; }
+          }
+
+          .intelligent-mesh {
+            position: absolute;
+            inset: 0;
+            background: 
+              repeating-linear-gradient(
+                45deg,
+                rgba(0, 220, 130, 0.03) 0px,
+                rgba(0, 220, 130, 0.03) 1px,
+                transparent 1px,
+                transparent 40px
+              );
+            animation: meshMove 20s linear infinite;
+          }
+
+          @keyframes meshMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+          }
+                  `}</style>
 
       {/* Hero Section */}
       <div className="container mx-auto px-6 pt-20">
@@ -310,11 +425,11 @@ const Future = {
               <span className="text-[#00DC82]">Web Development  Design AI Integration</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Build Your<br />
-              <span className="gradient-text">Digital Future</span>
+            Website Creation, <br />
+              <span className="gradient-text">One Click at a Time</span>
             </h1>
             <p className="text-gray-400 text-lg md:text-xl">
-              From concept to deployment, we create cutting-edge websites and applications that define the future of digital experiences.
+            Building websites has never been this easy. Just click, create, and launch!
             </p>
             <div className="flex space-x-4">
             <Link href="/login">
@@ -396,14 +511,14 @@ const Future = {
                 icon: "🤖",
                 title: "AI Code Generation",
                 description: "Generate clean, optimized code automatically",
-                features: ["React/Next.js", "Tailwind CSS", "TypeScript", "API Integration"],
+                features: ["Html", "Tailwind CSS", "Javascript"],
                 gradient: "from-[#00DC82] to-[#36E4DA]"
               },
               {
                 icon: "🎨",
-                title: "Smart Design System",
+                title: "Smart Pattern System",
                 description: "AI-powered design suggestions and components",
-                features: ["Custom Themes", "Responsive Layout", "Animation Library", "Design Export"],
+                features: ["Custom Themes", "Responsive Layout", "Animation Library", "Export"],
                 gradient: "from-[#36E4DA] to-[#0047E1]"
               },
               {
@@ -486,48 +601,7 @@ const Future = {
       </div>
 
       {/* New Services Section */}
-      <div className="container mx-auto px-6 py-32">
-        <h2 className="text-4xl font-bold text-center text-white mb-16">
-          Our <span className="gradient-text">Services</span>
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Web Development",
-              icon: "🚀",
-              description: "Custom websites and web applications built with modern technologies",
-              features: ["React/Next.js", "Node.js", "Full-Stack", "API Integration"]
-            },
-            {
-              title: "UI/UX Design",
-              icon: "🎨",
-              description: "Beautiful, intuitive interfaces that captivate users",
-              features: ["User Research", "Wireframing", "Prototyping", "Testing"]
-            },
-            {
-              title: "Digital Solutions",
-              icon: "💡",
-              description: "Comprehensive digital solutions for modern businesses",
-              features: ["E-commerce", "CMS", "Analytics", "SEO"]
-            }
-          ].map((service, index) => (
-            <div key={index} className="glass-effect p-6 rounded-xl tech-card">
-              <div className="text-4xl mb-4">{service.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
-              <p className="text-gray-400 mb-4">{service.description}</p>
-              <ul className="space-y-2">
-                {service.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="text-gray-300 flex items-center">
-                    <span className="w-2 h-2 bg-[#00DC82] rounded-full mr-2"></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
+      
       {/* Pricing Section */}
       <div className="container mx-auto px-6 py-32 relative">
         {/* Background Effects */}
@@ -831,6 +905,38 @@ const Future = {
           </div>
         </div>
       </footer>
+
+      {/* New background elements */}
+      <div className="neural-network"></div>
+      <div className="ai-circuit"></div>
+      <div className="intelligent-mesh"></div>
+      
+      {/* Dynamic data streams */}
+      {streams.map((stream, i) => (
+        <div
+          key={`stream-${i}`}
+          className="data-stream"
+          style={{
+            left: stream.left,
+            animationDelay: stream.animationDelay,
+            animationDuration: stream.animationDuration
+          }}
+        ></div>
+      ))}
+      
+      {/* Dynamic quantum particles */}
+      {particles.map((particle, i) => (
+        <div
+          key={`particle-${i}`}
+          className="quantum-particles"
+          style={{
+            left: particle.left,
+            top: particle.top,
+            animationDelay: particle.animationDelay,
+            animationDuration: particle.animationDuration
+          }}
+        ></div>
+      ))}
     </div>
   );
 };
