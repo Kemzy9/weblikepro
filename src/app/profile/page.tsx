@@ -115,7 +115,7 @@ export default function ProfilePage() {
                 <nav className="fixed top-0 left-16 right-0 z-2 bg-white flex items-center justify-between">
                     <div className="flex items-center">
                         <Image src="/logo.png" alt="Logo" width={50} height={50} />
-                        <span className="ml-2 text-black text-xl font-semibold">Weblike</span>
+                        <span className="ml-2 text-black text-xl font-semibold"></span>
                     </div>
                    
                     <div className="flex items-center space-x-4">
