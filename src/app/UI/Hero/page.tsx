@@ -140,7 +140,7 @@ const GeneratedComponent: React.FC = () => {
                   <br />
                   <span className="gradient-text text-glow">   in Minutes</span>
                   <br />
-                with by Clicking
+                 by Clicking with AI
                 </h1>
                 <p className="text-xl text-gray-400 max-w-xl">
                 Build your dream website effortlessly. No coding or skills required—just click and create!
