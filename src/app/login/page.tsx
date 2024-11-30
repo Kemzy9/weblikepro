@@ -54,7 +54,7 @@ export default function LoginPage() {
             <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6">
                 <div className="mb-8 flex flex-col items-center">
                     <Logo />
-                    <h1 className="text-xl font-bold text-white mt-4">Webd.one</h1>
+                    <h1 className="text-xl font-bold text-white mt-4"></h1>
                     <p className="text-white mt-2">Welcome back! Please login to continue</p>
                 </div>
 
