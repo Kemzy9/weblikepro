@@ -3,7 +3,6 @@ import Link from "next/link"
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
-import Image from "next/image"
 import toast from "react-hot-toast"
 import {
     Card,
@@ -16,9 +15,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {  Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import Logo from "@/app/UI/logo/page"
-
 
 export default function SignupPage() {
     const router = useRouter()
@@ -34,115 +32,79 @@ export default function SignupPage() {
         try {
             setLoading(true)
             const response = await axios.post("/api/users/signup", user)
-            console.log("Signup response:", response)
-            
-            toast.success("Account created successfully!")
-            toast("Redirecting to your dashboard...", { 
-                duration: 3000,
-                icon: '🚀'
-            })
-            
-            // Short delay before redirect to allow toasts to be seen
-            setTimeout(() => {
-                router.push("/profile") // or wherever you want to redirect after signup
-            }, 2000)
-            
+            toast.success("Signup successful")
+            localStorage.setItem("userEmail", user.email)
+            router.push("/verify-otp")
         } catch (error: any) {
-            console.error("Signup error:", error)
-            toast.error(error.response?.data?.error || "Signup failed. Please try again.")
+            toast.error(error.message)
         } finally {
             setLoading(false)
         }
     }
-    return (
-        <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#0A0A0A]">
-            {/* Left side - Image and Testimonial */}
-           
 
-            {/* Right side - Signup form */}
-            <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-6">
-                <div className="mb-8 flex flex-col items-center">
-                    <Logo />
-                    <h1 className="text-xl font-bold text-white mt-4"></h1>
-                    <p className="text-gray-500 mt-2">Create your  account</p>
-                </div>
-                <Card className="w-[350px] sm:w-[400px] border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader className="space-y-1 pb-6">
-                        <CardTitle className="text-2xl font-bold text-gray-900">Sign Up</CardTitle>
-                        <CardDescription className="text-gray-500">
-                            Enter your details to create your account
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-5">
-                        <div className="grid gap-2">
-                            <Label htmlFor="username" className="text-white font-medium">Username</Label>
-                            <Input
-                                id="username"
-                                type="text"
-                                placeholder="devmaster"
-                                value={user.username}
-                                onChange={(e) => setUser({ ...user, username: e.target.value })}
-                                className="h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 bg-white"
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="email" className="text-white font-medium">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="you@example.com"
-                                value={user.email}
-                                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                                className="h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 bg-white"
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="••••••••"
-                                value={user.password}
-                                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                                className="h-11 border-gray-200 focus:border-blue-500 focus:ring-blue-500 bg-white"
-                            />
-                        </div>
-                    </CardContent>
-                    <CardFooter className="flex flex-col space-y-4 pt-4">
-                        <Button
-                            className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors duration-200"
-                            disabled={!user.username || !user.email || !user.password}
-                            onClick={onSignup}
-                        >
-                            {loading ? (
-                                <div className="flex items-center justify-center">
-                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                    <span>Creating Account...</span>
-                                </div>
-                            ) : (
-                                "Create Account"
-                            )}
-                        </Button>
-                        <div className="text-center text-sm text-gray-500">
-                            Already have an account?{" "}
-                            <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
-                                Sign in
-                            </Link>
-                           
-                        </div>
-                    </CardFooter>
-                </Card>
-                <div className="mt-8 text-center text-sm text-gray-500">
-                    By signing up, you agree to our{" "}
-                    <Link href="/TermsAndConditions" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
-Terms And Conditions
-                    </Link>{" "}
-                    and{" "}
-                    <Link href="/PrivacyPolicy" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
-                        Privacy Policy
-                    </Link>
-                </div>
+    return (
+        <div className="min-h-screen flex flex-wrap flex-col items-center justify-center bg-gray-900 text-gray-100">
+            <div className="mb-6 flex flex-col items-center">
+                <div className="h-12 w-12 text-gray-200" />
+             
+                <h1 className="text-3xl font-bold text-gray-100">Next js Boilerplate</h1>
             </div>
+            <Card className="w-[300px] sm:w-[350px] bg-white text-black  ">
+                <CardHeader className="space-y-1">
+                    <CardTitle className="text-2xl">Signup</CardTitle>
+                    <CardDescription>
+                        Enter your username, email, and password to Signup
+                    </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                    <div className="grid gap-2">
+                        <Label htmlFor="username">Username</Label>
+                        <Input
+                            id="username"
+                            type="text"
+                            placeholder="username"
+                            value={user.username}
+                            onChange={(e) => setUser({ ...user, username: e.target.value })}
+                            className="bg-gray-700 text-gray-300 placeholder-white"
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            placeholder="m@example.com"
+                            value={user.email}
+                            onChange={(e) => setUser({ ...user, email: e.target.value })}
+                            className="bg-gray-700 text-gray-300 placeholder-gray-500"
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            value={user.password}
+                            onChange={(e) => setUser({ ...user, password: e.target.value })}
+                            className="bg-gray-700 text-gray-300 placeholder-gray-500"
+                        />
+                    </div>
+                </CardContent>
+                <CardFooter className="flex flex-col space-y-2">
+                    <Button
+                        className="w-full"
+                        disabled={user.username.length > 0 && user.email.length > 0 && user.password.length > 0 ? false : true}
+                        onClick={onSignup}
+                    >
+                        {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Signup"}
+                    </Button>
+                    <Link className="w-full" href='/login'>
+                        <Button className="w-full" variant='outline'>
+                            Visit Login Page
+                        </Button>
+                    </Link>
+                </CardFooter>
+            </Card>
         </div>
     )
 }
