@@ -2,82 +2,58 @@ import { connect } from '@/dbConfig/dbConfig'
 import User from '@/models/userModel'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from "bcryptjs"
-
-import jwt from "jsonwebtoken"
+import { sendEmail } from '@/helpers/mailer'
+import crypto from 'crypto'
 
 connect()
 
-export async function POST(request: NextRequest){
+export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const {username, email, password} = reqBody
-        
-        //check if user already exists
-        const user = await User.findOne({email})
-        if(user){
-            return NextResponse.json({error :'User Already Exists'}, {status: 400})
+        const { username, email, password } = reqBody
+
+        // Check if user already exists
+        const existingUser = await User.findOne({ email })
+        if (existingUser) {
+            return NextResponse.json({ error: 'User Already Exists' }, { status: 400 })
         }
 
-        //Hash the password
+        // Hash the password
         const salt = await bcryptjs.genSalt(10)
         const hashedPassword = await bcryptjs.hash(password, salt)
 
-        //Create a new user
+        // Create a new user
         const newUser = new User({
             username,
             email,
             password: hashedPassword
         })
 
-        //Save the new user to the database
+        // Save the new user to the database
         const savedUser = await newUser.save()
 
-        // Generate permanent token
-        const tokenData = {
-            id: savedUser._id,
-            username: savedUser.username,
-            email: savedUser.email
-        }
-        
-        const permanentToken = jwt.sign(
-            tokenData,
-            process.env.TOKEN_SECRET!
-            // No expiresIn - token will never expire
-        );
+        // Generate OTP
+        const otp = crypto.randomInt(100000, 999999).toString()
+        const otpExpiry = Date.now() + 300000
 
-        // Create profile session token
-        const sessionToken = jwt.sign(
-            tokenData,
-            process.env.TOKEN_SECRET!,
-            { expiresIn: "1h" }
-        );
+        // Update user with OTP and expiry
+        await User.findByIdAndUpdate(savedUser._id, { otp, otpExpiry })
 
-        // Create response
-        const response = NextResponse.json({
-            message: "User created successfully",
+        // Send OTP email
+        await sendEmail({
+            email,
+            emailType: "OTP",
+            userId: savedUser._id,
+            otp
+        })
+
+        return NextResponse.json({
+            message: "User created successfully. Please check your email for the OTP.",
             success: true,
             savedUser
         })
 
-        // Set cookies
-        response.cookies.set("token", permanentToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax"
-        });
-
-        response.cookies.set("profile_session", sessionToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 86400
-        });
-
-       
-
-        return response;
-
-    } catch(error: any) {
-        return NextResponse.json({ error: error.message }, {status: 500})
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
