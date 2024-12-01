@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@weblikepro',
-    creator: '@weblikeai',
+    creator: '@nain',
     title: 'Weblikepro - Create Custom  Website With AI',
-    description: 'Creating Website With AI its become Easy creating Unlimited page and Website with AI NO  pre made template ',
+    description: 'Create website By Jsut clicking With AI  ',
     images: ['https://weblike.ai/twitter-card.png'],
   },
   icons: {
