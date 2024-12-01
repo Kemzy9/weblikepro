@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '@/components/theme-provider'
+import GoogleAnalytics from '@/app/GoogleAnalytics'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -43,12 +44,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+     <html lang="en">
       <body className={inter.className}>
 
           <ThemeProvider attribute="class" defaultTheme="White" enableSystem>
             {children}
-
+            <GoogleAnalytics />
             <Toaster position="top-center" />
           </ThemeProvider>  
    
