@@ -8,7 +8,7 @@ export const sendEmail = async ({ email, emailType, userId, otp }: any) => {
         const hashedToken = userId.toString()
 
         const mailOptions = {
-            from: 'usamaabid.wp@gmail.com',
+            from: 'weblikepro@gmail.com',
             to: email,
             subject: emailType === "OTP" ? "Your OTP Code" : "Verify Your Email",
             html: emailType === "OTP"
