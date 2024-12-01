@@ -50,7 +50,7 @@ export default function RootLayout({
 
           <ThemeProvider attribute="class" defaultTheme="White" enableSystem>
             {children}
-            <GoogleAnalytics />
+              <GoogleAnalytics />
             <Toaster position="top-center" />
           </ThemeProvider>  
    
