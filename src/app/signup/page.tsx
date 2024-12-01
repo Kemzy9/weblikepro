@@ -47,7 +47,7 @@ export default function SignupPage() {
             <div className="mb-6 flex flex-col items-center">
                 <div className="h-12 w-12 text-gray-200" />
              
-                <h1 className="text-3xl font-bold text-gray-100">Next js Boilerplate</h1>
+                <h1 className="text-3xl font-bold text-gray-100">webdone</h1>
             </div>
             <Card className="w-[300px] sm:w-[350px] bg-white text-black  ">
                 <CardHeader className="space-y-1">
