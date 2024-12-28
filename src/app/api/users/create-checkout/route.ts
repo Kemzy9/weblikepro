@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
-import { MongoClient, ObjectId } from 'mongodb';
-
-const uri = process.env.MONGODB_URI!;
-const client = new MongoClient(uri);
 
 export async function POST(req: Request) {
   try {
@@ -78,49 +74,10 @@ export async function POST(req: Request) {
 
     console.log('Lemon Squeezy response:', response.data);
 
-    const subscription = response.data.data;
-    const subscriptionId = subscription.id;
-    const startDate = new Date(subscription.attributes.created_at);
-    const endDate = subscription.attributes.ends_at ? new Date(subscription.attributes.ends_at) : null;
-    const renewalDate = subscription.attributes.renews_at 
-      ? new Date(subscription.attributes.renews_at) 
-      : addOneMonth(startDate);
-
-    // Define plan limits based on the subscription
-    const limits = getLimitsForPlan(plan);
-
-    // Connect to MongoDB and update the user details
-    await client.connect();
-    const database = client.db('your_database_name');
-    const usersCollection = database.collection('users');
-
-    await usersCollection.updateOne(
-      { _id: new ObjectId(userId) },
-      {
-        $set: {
-          subscription: {
-            subscriptionId,
-            status: subscription.attributes.status,
-            createdAt: startDate,
-            updatedAt: new Date(subscription.attributes.updated_at),
-            renewsAt: renewalDate,
-            endsAt: endDate,
-            productName: plan,
-            customerPortalUrl: subscription.attributes.urls?.customer_portal || 'N/A',
-            limits,
-            renewalPeriod: isYearly(priceId) ? 'yearly' : 'monthly',
-          },
-        },
-      },
-      { upsert: true }
-    );
-
     return NextResponse.json({ url: response.data.data.attributes.url });
   } catch (error) {
     console.error('Error creating checkout:', error);
-    // ... error handling ...
-  } finally {
-    await client.close();
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 
@@ -163,9 +120,7 @@ function addOneMonth(date: Date): Date {
 function isYearly(priceId: string): boolean {
   return [
     process.env.NEXT_PUBLIC_LEMON_SQUEEZY_STANDARD_YEARLY_PRICE_ID,
-    process.env.NEXT_PUBLIC_LEMON_SQUEEZY_CREATOR_YEARLY_PRICE_IDD,
+    process.env.NEXT_PUBLIC_LEMON_CREATOR_PRO_YEARLY_PRICE_ID,
     process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PREMIUM_YEARLY_PRICE_ID
   ].includes(priceId);
 }
-
-// itrid this owrk terefwrwrwr
